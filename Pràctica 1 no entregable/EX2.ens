@@ -1,0 +1,29 @@
+ORIGEN 200h
+INICIO INI
+ .DATOS
+var1 valor 01h		 ; Carrega el valor 01h en l’adreça de memòria 200h
+var3 valor 03h		 ; Carrega el valor 03h en l’adreça de memòria 201h
+res valor 00h		 ; Carrega el valor 00h en l’adreça de memòria 202h
+ .CODIGO
+INI:
+ MOVL R0, BYTEBAJO DIRECCION var1 		; R0L => 00h
+ MOVH R0, BYTEALTO DIRECCION var1		; R0H => 02h
+										; R0 = 0200h Guardem l’adreça de memòria 0200h a R0
+ MOVL R1, BYTEBAJO DIRECCION var3		; R1L => 01h
+ MOVH R1, BYTEALTO DIRECCION var3 		; R1H => 02h
+										; R1 = 0201h Guardem l’adreça de memòria 0201h a R1
+ MOV R3,[R0] 							; R3 => [R0] R3 = 0001h
+										; Carreguem el contingut de l’adreça de memòria guardada a R0
+										; (variable var1) dins del registre R3
+
+ MOV R4,[R1] 							; R4 => [R1] R4 = 0003h
+										;Carreguem el contingut de l’adreça de memòria guardada a R1
+										; (variable var3) dins del registre R4
+ ADD R5, R3, R4 						; R5 => R3+ R4 R5= 0004h
+ MOVL R2, BYTEBAJO DIRECCION res 		; R2L => 02h
+ MOVH R2, BYTEALTO DIRECCION res 		; R2H => 02h
+										; R2 = 0202h Guardem l’adreça de memòria 0202h a R0
+ MOV [R2], R5 							; Guarda el contingut del registre R5 en l'adreça de memòria apuntada per la
+										; variable res per tant l'adreça de memòria 0202h després de tot el procés
+										; contindrà la suma dels continguts de les variables var1 i var3
+ FIN 

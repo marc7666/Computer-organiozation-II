@@ -1,0 +1,21 @@
+ORIGEN 200h
+INICIO INI
+
+.PILA 10h
+.DATOS
+CONT VALOR 5
+.CODIGO
+
+INI:
+
+MOVH R0, 00h
+MOVL R0, 02h
+MOVH R1, 16				 ; = 10h = 16d
+MOVL R1, 20				 ; = 14h = 20d
+MOVH R2, 00000001B		 ; = 01h = 1d
+MOVL R2, 11111111B		 ; = FFh = 255d
+MOVH R3, 'a'			 ; = 61h = 97d = codi ascii 'a'
+MOV R4, R0				 ; R4 = R0
+ADD R5,R1,R0
+JMP -1
+FIN
